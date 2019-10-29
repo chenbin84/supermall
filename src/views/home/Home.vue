@@ -1,12 +1,16 @@
 <template>
     <div id="home">
-      <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+          <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+        <scroll class="content" ref="scroll">
+      
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <feature-view />
       <tab-control class="tab-control" :titles="['流行','新款','精选']" 
       @tabClick="tabClick" />
       <good-list :goods="showGoods"></good-list>
+        </scroll>
+        <back-top @click.native="backClick"></back-top>
     </div>
 </template>
 
@@ -18,8 +22,11 @@ import FeatureView  from './childComps/FeatureView';
 import NavBar from 'components/common/navbar/NavBar';
 import TabControl from 'components/content/tabControl/TabControl'
 import GoodList from 'components/content/goods/GoodsList'
+import Scroll from 'components/common/scroll/Scroll'
+import BackTop from 'components/content/backTop/BackTop'
 
 import{getHomeMultidata, getHomeGood} from "network/home"
+
 
   export default {
     name: "Home",
@@ -29,7 +36,9 @@ import{getHomeMultidata, getHomeGood} from "network/home"
       RecommendView,
       FeatureView,
       TabControl,
-      GoodList
+      GoodList,
+      Scroll,
+      BackTop
       
     },
     data() {
@@ -76,6 +85,11 @@ import{getHomeMultidata, getHomeGood} from "network/home"
         }
         
       },
+      backClick() {
+        // console.log('backClick');
+        this.$refs.scroll.scrollTo(0,0,500)
+        
+      },
 
       // 网络请求相关方法
       getHomeMultidata() {
@@ -100,7 +114,9 @@ import{getHomeMultidata, getHomeGood} from "network/home"
 
 <style scoped>
   #home {
-    padding-top: 44px
+    padding-top: 44px;
+    height: 100vh;
+    position: relative;
   }
   .home-nav {
     background-color: var(--color-tint);
@@ -115,5 +131,20 @@ import{getHomeMultidata, getHomeGood} from "network/home"
     position: sticky;
     top: 44px;
     z-index: 9;
+  }
+  /* 动态计算 */
+  /* .content {
+    height: calc(100%-93px);
+    overflow: hidden;
+    margin-top: 51px;
+  } */
+  .content {
+    /* height: 300px; */
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
   }
 </style>
