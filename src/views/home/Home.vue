@@ -29,7 +29,9 @@ import NavBar from 'components/common/navbar/NavBar';
 import TabControl from 'components/content/tabControl/TabControl'
 import GoodList from 'components/content/goods/GoodsList'
 import Scroll from 'components/common/scroll/Scroll'
-import BackTop from 'components/content/backTop/BackTop'
+// import BackTop from 'components/content/backTop/BackTop'  
+import {backTopMixin} from "common/mixin";
+
 
 import{getHomeMultidata, getHomeGood} from "network/home"
 import {debounce} from 'common/utils'
@@ -44,9 +46,10 @@ import {debounce} from 'common/utils'
       TabControl,
       GoodList,
       Scroll,
-      BackTop
+      // BackTop
       
     },
+      mixins: [backTopMixin],
     data() {
       return {
         banners:[],
@@ -57,7 +60,7 @@ import {debounce} from 'common/utils'
           'sell': {page: 0, list: []},
         },
         currentType:'pop',
-        isShowBackTop:false,
+        // isShowBackTop:false,
         tabOffsetTop:0,
         isTabFixed:false,
         saveY:0
@@ -124,15 +127,15 @@ import {debounce} from 'common/utils'
         this.$refs.tabcontrol2.currentIndex=index
         
       },
-      backClick() {
-        // console.log('backClick');
-        this.$refs.scroll.scrollTo(0,0,500)
+      // backClick() {
+      //   // console.log('backClick');
+      //   this.$refs.scroll.scrollTo(0,0,500)
         
-      },
+      // },
       contentScroll(position) {
         // console.log(position);
         //判断backTop是否显示
-        this.isShowBackTop=(-position.y) >1000
+        this.listenShowBackTop(position)
         //决定tabControl是否吸顶（fixed)
         this.isTabFixed=(-position.y)>this.tabOffsetTop
       },
@@ -140,7 +143,7 @@ import {debounce} from 'common/utils'
       //  console.log('666');
       
         this.getHomeGood(this.currentType)
-      },
+      }, 
       //获取距离顶部的值
       swiperImageLoad() {
         this.tabOffsetTop =this.$refs.tabControl2.$el.offsetTop
