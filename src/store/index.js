@@ -1,18 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-//安装插件
+
+
+import mutations from './mutations'
+import actions from './actions'
+import getters from './getters'
+
 Vue.use(Vuex)
 
-//创建Store对象
+const state = {
+    cartList: []
+}
+
 const store = new Vuex.Store({
-    state: {
-        cartList: []
-    },
-    mutations: {
-        addCart(state, payload)
-    }
+    state,
+    mutations,
+    actions,
+    getters
+
 })
 
-//挂载到Vue实例中
 export default store

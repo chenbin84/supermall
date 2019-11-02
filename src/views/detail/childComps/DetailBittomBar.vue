@@ -1,6 +1,6 @@
 <template>
   <div class="bottom-bar">
-      <div class="bar-item bar-left">
+    <div class="bar-item bar-left">
       <div>
         <i class="icon service"></i>
         <span class="text">客服</span>
@@ -22,27 +22,19 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-
-    }
-  },
-  methods: {
-      addToCart () {
-        //   console.log('点击了添加购物车')
+	export default {
+		name: "DetailBottomBar",
+    methods: {
+      addToCart() {
         this.$emit('addCart')
       }
-  },
-  components: {
-
-  }
-}
+    }
+	}
 </script>
 
-<style scoped >
-     .bottom-bar {
-    /* height: 58px; */
+<style scoped>
+  .bottom-bar {
+    /* height: 49px; */
     position: fixed;
     background-color: #fff;
     left: 0;
@@ -70,7 +62,7 @@ export default {
     display: block;
     width: 22px;
     height: 22px;
-    margin: 5px auto 3px;
+    margin: 10px auto 3px;
     background: url("~assets/img/detail/detail_bottom.png") 0 0/100%;
   }
 
@@ -83,6 +75,7 @@ export default {
   }
 
   .bar-right {
+    /* flex:1; */
     font-size: 15px;
     color: #fff;
     line-height: 49px;

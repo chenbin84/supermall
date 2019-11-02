@@ -5,6 +5,8 @@
       ref="scroll" 
       :probe-type="3"
       @scroll="contentScroll">
+        <!-- <div class="aaa" v-for="item in $store.state.cartList">{{item}}</div> -->
+        <!-- <div>{{$store.state.cartList.length}}</div> -->
         <detail-swiper :top-images="topImages"></detail-swiper>
         <detail-base-info :goods="goods"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
@@ -101,13 +103,14 @@ export default {
         //获取购物车需要的信息
         const product= {};
         product.image=this.topImages[0];
-        product.title=this.goodsInfo.title;
-        product.desc =this.goodsInfo.desc;
-        product.price=this.goodsInfo.newPrice;
+        product.title=this.goods.title;
+        product.desc =this.goods.desc;
+        product.price=this.goods.newPrice;
         product.iid=this.iid
 
         //将商品加到购物车里面 vuex
-        this.$store.cartList.push(product)
+        // this.$store.cartList.push(product)
+        this.$store.dispatch('addCart',product)
       }
     },
    
@@ -181,11 +184,14 @@ export default {
     background-color: #fff;
     height: 100vh;
   }
-.content {
+ .content {
     height: calc(100% - 44px - 49px);
   }
   .detail-nav {
     position: relative;
     z-index: 9;
   }
+  /* .aaa {
+    width: 44px;
+  } */
 </style>
