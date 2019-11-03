@@ -5,12 +5,16 @@
             <div slot="center">购物车({{cartLength}})</div>
         </nav-bar>
         <!-- 商品列表 -->
-        <cart-list></cart-list>
+        <cart-list />
+
+        <!-- 底部汇总 -->
+        <cart-bottom-bar />
     </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar';
+import CartBottomBar from './childComps/CartBottomBar'
 import CartList from './childComps/CartList'
 import {mapGetters} from 'vuex'
 
@@ -19,7 +23,8 @@ import {mapGetters} from 'vuex'
     name: "Cart",
     components:{
       NavBar,
-      CartList
+      CartList,
+      CartBottomBar
     },
     computed:{
       ...mapGetters(['cartLength'])
